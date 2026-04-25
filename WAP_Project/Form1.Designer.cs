@@ -32,7 +32,10 @@
             panel1 = new Panel();
             label1 = new Label();
             errorProvider = new ErrorProvider(components);
-            listView1 = new ListView();
+            shopListView = new ListView();
+            ColumnName = new ColumnHeader();
+            ColumnAddress = new ColumnHeader();
+            ColumnManager = new ColumnHeader();
             shopNameBox = new TextBox();
             shopNameLabel = new Label();
             shopAddressBox = new TextBox();
@@ -71,16 +74,37 @@
             // 
             errorProvider.ContainerControl = this;
             // 
-            // listView1
+            // shopListView
             // 
-            listView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            listView1.BackColor = Color.FromArgb(48, 48, 48);
-            listView1.BorderStyle = BorderStyle.None;
-            listView1.Location = new Point(193, 173);
-            listView1.Name = "listView1";
-            listView1.Size = new Size(496, 265);
-            listView1.TabIndex = 3;
-            listView1.UseCompatibleStateImageBehavior = false;
+            shopListView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            shopListView.BackColor = Color.FromArgb(48, 48, 48);
+            shopListView.BorderStyle = BorderStyle.None;
+            shopListView.Columns.AddRange(new ColumnHeader[] { ColumnName, ColumnAddress, ColumnManager });
+            shopListView.ForeColor = Color.White;
+            shopListView.FullRowSelect = true;
+            shopListView.Location = new Point(193, 173);
+            shopListView.MultiSelect = false;
+            shopListView.Name = "shopListView";
+            shopListView.Size = new Size(482, 265);
+            shopListView.TabIndex = 3;
+            shopListView.UseCompatibleStateImageBehavior = false;
+            shopListView.View = View.Details;
+            shopListView.SelectedIndexChanged += shopListView_SelectedIndexChanged;
+            // 
+            // ColumnName
+            // 
+            ColumnName.Text = "Name";
+            ColumnName.Width = 100;
+            // 
+            // ColumnAddress
+            // 
+            ColumnAddress.Text = "Address";
+            ColumnAddress.Width = 100;
+            // 
+            // ColumnManager
+            // 
+            ColumnManager.Text = "Manager";
+            ColumnManager.Width = 100;
             // 
             // shopNameBox
             // 
@@ -97,7 +121,7 @@
             // shopNameLabel
             // 
             shopNameLabel.AutoSize = true;
-            shopNameLabel.BackColor = Color.Black;
+            shopNameLabel.BackColor = Color.Transparent;
             shopNameLabel.ForeColor = Color.FromArgb(189, 193, 198);
             shopNameLabel.Location = new Point(17, 34);
             shopNameLabel.Name = "shopNameLabel";
@@ -162,6 +186,7 @@
             addShopButton.TabIndex = 6;
             addShopButton.Text = "Add Shop";
             addShopButton.UseVisualStyleBackColor = false;
+            addShopButton.Click += addShopButton_Click;
             // 
             // groupBox1
             // 
@@ -176,7 +201,7 @@
             groupBox1.ForeColor = Color.FromArgb(189, 193, 198);
             groupBox1.Location = new Point(193, 12);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(496, 155);
+            groupBox1.Size = new Size(482, 155);
             groupBox1.TabIndex = 1;
             groupBox1.TabStop = false;
             groupBox1.Text = "New Shop";
@@ -186,10 +211,11 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(33, 33, 33);
-            ClientSize = new Size(701, 450);
-            Controls.Add(listView1);
+            ClientSize = new Size(687, 450);
+            Controls.Add(shopListView);
             Controls.Add(panel1);
             Controls.Add(groupBox1);
+            ForeColor = SystemColors.ActiveCaptionText;
             Name = "Form1";
             Text = "Form1";
             panel1.ResumeLayout(false);
@@ -204,7 +230,7 @@
         private Panel panel1;
         private Label label1;
         private ErrorProvider errorProvider;
-        private ListView listView1;
+        private ListView shopListView;
         private GroupBox groupBox1;
         private Button addShopButton;
         private Label shopManagerLabel;
@@ -213,5 +239,8 @@
         private TextBox shopAddressBox;
         private Label shopNameLabel;
         private TextBox shopNameBox;
+        private ColumnHeader ColumnName;
+        private ColumnHeader ColumnAddress;
+        private ColumnHeader ColumnManager;
     }
 }

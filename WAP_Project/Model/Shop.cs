@@ -5,22 +5,23 @@ using WAP_Project.Exceptions;
 
 namespace WAP_Project.Model
 {
-    internal class Shop
+    public class Shop
     {
-        public Shop(long shopId, string name, string address, string manager, List<Department> departmentList)
+        public Shop(long shopId, string name, string address, string manager)
         {
             ShopId = shopId;
             Name = name;
             Address = address;
-            DepartmentList = departmentList;
+            //DepartmentList = departmentList;
             Manager = manager;
         }
 
         public long ShopId { get; set; }
         public String Name { get; set; }
+        private string _address;
         public String Address { get 
             {
-                return Address;
+                return _address;
             } 
             set 
             {
@@ -29,10 +30,10 @@ namespace WAP_Project.Model
                     throw new InvalidAddressException(value);
 
                 }
-                Address = value;
+                _address = value;
             } 
         }
         public String Manager { get; set; }
-        public List<Department> DepartmentList { get; set; } = new List<Department>();
+        //public List<Department> DepartmentList { get; set; } = new List<Department>();
     }
 }
